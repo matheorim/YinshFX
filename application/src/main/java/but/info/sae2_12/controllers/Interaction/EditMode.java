@@ -1,4 +1,4 @@
-package but.info.sae2_12.Controller.Interaction;
+package but.info.sae2_12.controllers.Interaction;
 
 import javafx.scene.input.MouseEvent;
 
@@ -26,11 +26,6 @@ public class EditMode extends InteractionMode {
 	@Override
 	public void exited(MouseEvent event, HexSquare hex) {
 
-	}
-
-	@Override
-	public String getDisplayName() {
-		return "mode édition";
 	}
 	
 }

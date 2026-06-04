@@ -1,4 +1,4 @@
-package but.info.sae2_12.Controller.Interaction;
+package but.info.sae2_12.controllers.Interaction;
 
 import java.util.Set;
 
@@ -39,8 +39,4 @@ public class GameMode extends InteractionMode{
 
 	}
 
-	@Override
-	public String getDisplayName() {
-		return "mode jeu ";
-	}
 }

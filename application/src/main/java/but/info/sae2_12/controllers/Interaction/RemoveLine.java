@@ -1,4 +1,4 @@
-package but.info.sae2_12.Controller.Interaction;
+package but.info.sae2_12.controllers.Interaction;
 
 import java.util.Set;
 
@@ -56,8 +56,5 @@ public void exited(MouseEvent event, HexSquare hex) {
 	}
 }
 
-@Override
-public String getDisplayName() {
-	return "retirer ligne  ";
-}
+
 }

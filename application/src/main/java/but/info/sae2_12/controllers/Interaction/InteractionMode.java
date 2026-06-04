@@ -1,4 +1,4 @@
-package but.info.sae2_12.Controller.Interaction;
+package but.info.sae2_12.controllers.Interaction;
 
 import javafx.scene.input.MouseEvent;
 
@@ -13,5 +13,4 @@ public abstract class InteractionMode {
 	public abstract void handleClick(MouseEvent event , HexSquare hex);
 	public abstract void entered(MouseEvent event , HexSquare hex);
 	public abstract void exited(MouseEvent event , HexSquare hex);
-	public abstract String getDisplayName();
 }
