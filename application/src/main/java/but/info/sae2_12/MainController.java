@@ -2,16 +2,15 @@ package but.info.sae2_12;
 
 import but.info.sae2_12.controllers.CentralController;
 import but.info.sae2_12.controllers.GameController;
+import but.info.sae2_12.controllers.Interaction.EditMode;
+import but.info.sae2_12.controllers.Interaction.InteractionMode;
 import but.info.sae2_12.controllers.TypePartie;
 import but.info.sae2_12.model.Model;
 import but.info.sae2_12.model.factory.FactoryDoubled;
 import but.info.sae2_12.model.factory.IFactory;
-import but.info.sae2_12.model.state.State;
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 
 import java.net.URL;
@@ -23,6 +22,8 @@ public class MainController implements Initializable {
     public CentralController hexGridController;
     @FXML
     public GameController gameController;
+    private InteractionMode interactionMode = new EditMode(this);
+
 
     private Model model;
 
@@ -92,5 +93,11 @@ public class MainController implements Initializable {
         return couleur3;
     }
 
+    public InteractionMode getInteractionMode() {
+        return interactionMode;
+    }
 
+    public void setInteractionMode(InteractionMode mode) {
+        this.interactionMode = mode;
+    }
 }

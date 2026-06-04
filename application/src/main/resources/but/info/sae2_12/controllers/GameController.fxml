@@ -47,7 +47,7 @@
 		</Button>
 
 		<HBox alignment="CENTER">
-			<CheckBox fx:id="modeEdition" mnemonicParsing="false" onAction="#onToggleModeEdition" text="Mode Édition">
+			<CheckBox fx:id="modeEdition" selected="true" mnemonicParsing="false" onAction="#onToggleModeEdition" text="Mode Édition">
 				<VBox.margin>
 					<Insets bottom="10.0" left="15.0" top="10.0" />
 				</VBox.margin>

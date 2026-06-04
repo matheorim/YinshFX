@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import but.info.sae2_12.AI.MiniMax;
+import but.info.sae2_12.MainController;
 import but.info.sae2_12.model.Team;
 import but.info.sae2_12.model.state.IState;
 import javafx.fxml.FXML;
@@ -39,7 +40,8 @@ public class IAController implements Initializable {
 	public void setMainController(MainController mainController) {
 	    this.mainController = mainController;
 	}
-	
+
+	/*
 	public void updateProgressBar(IState state , Team teamIA ) {
 		double score = mainController.getMiniMax().evaluate(state, teamIA);
 		double calcul = (score + 100000) / 200000;
@@ -53,5 +55,7 @@ public class IAController implements Initializable {
 		alert.setContentText(mainController.getMiniMaxAI().chooseMove(mainController.getState()).toString());
 		alert.showAndWait();
 	}
+
+	 */
 
 }

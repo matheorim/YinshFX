@@ -1,14 +1,15 @@
 package but.info.sae2_12.controllers;
 
 import but.info.sae2_12.MainController;
-import but.info.sae2_12.model.factory.FactoryDoubled;
-import but.info.sae2_12.model.factory.IFactory;
-import but.info.sae2_12.model.state.IState;
+import but.info.sae2_12.form.HexSquare;
+import but.info.sae2_12.model.Team;
+import but.info.sae2_12.model.tokens.Pawn;
+import but.info.sae2_12.model.tokens.Ring;
+import but.info.sae2_12.model.tokens.Token;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
@@ -20,6 +21,8 @@ public class GameController {
 	@FXML private Button ligneNoire;
 	@FXML private CheckBox modeEdition;
 	@FXML private HBox choixEdition;
+	@FXML private ToggleGroup Team;
+	@FXML private ToggleGroup Token;
 	@FXML private ColorPicker pickerCouleur1;
 	@FXML private ColorPicker pickerCouleur2; 
 	@FXML private ColorPicker pickerCouleur3;
@@ -33,10 +36,14 @@ public class GameController {
 			pickerCouleur2.valueProperty().bindBidirectional(this.mainController.couleur2Property());
 			pickerCouleur3.valueProperty().bindBidirectional(this.mainController.couleur3Property());
 		}
+		if (Token.getSelectedToggle() == null) {
+			Token.getToggles().getFirst().setSelected(true);
+		}
+		if (Team.getSelectedToggle() == null) {
+			Team.getToggles().getFirst().setSelected(true);
+		}
 	}
 	
-	private IFactory factory = new FactoryDoubled();
-
 	@FXML
 	public void onToggleCoord(){
 		boolean coche = activeCoord.isSelected();
@@ -70,7 +77,6 @@ public class GameController {
 	    } else {
 	        choixEdition.setDisable(true);
 	    }
-	    // TODO: mainController.getModel().isEditModeProperty().set(modeEdition.isSelected());
 	}
 	
 	@FXML
@@ -98,5 +104,19 @@ public class GameController {
 			mainController.couleur3Property().setValue(nouvelleCouleur);
 			mainController.hexGridController.desinerGrille();
 		}
+	}
+
+	public but.info.sae2_12.model.Team getSelectedTeam() {
+		RadioButton selected = (RadioButton) Team.getSelectedToggle();
+		System.out.println("Toggle Team sélectionné : '" + (selected != null ? selected.getText() : "null") + "'");
+		if (selected == null) return but.info.sae2_12.model.Team.BLACK;
+		return selected.getText().equals("Noir") ? but.info.sae2_12.model.Team.BLACK : but.info.sae2_12.model.Team.WHITE;
+	}
+
+	public boolean isAnneauSelected() {
+		RadioButton selected = (RadioButton) Token.getSelectedToggle();
+		System.out.println("Toggle Token sélectionné : '" + (selected != null ? selected.getText() : "null") + "'");
+		if (selected == null) return true;
+		return selected.getText().equals("Anneau");
 	}
 }

@@ -3,6 +3,7 @@ package but.info.sae2_12.controllers.Interaction;
 
 import java.util.Set;
 import but.info.sae2_12.MainController;
+import but.info.sae2_12.form.HexSquare;
 import but.info.sae2_12.model.tokens.Ring;
 import coordinates.Coordinate;
 import javafx.scene.input.MouseEvent;
@@ -20,39 +21,25 @@ public class GameMode extends InteractionMode {
     public void handleClick(MouseEvent event, HexSquare hex) {
         if (selectedRing == null) {
             if (hex.getToken() instanceof Ring) {
-                selectedRing = hex.getCoordinate();
-                coupPossible = mainController.getModel().movesFrom(selectedRing);
-                afficherIndices(true);
+                selectedRing = hex.coordonnee;
+                coupPossible = getMainController().getModel().getCurrentState().availableMoves(selectedRing);
+                getMainController().hexGridController.afficherIndice(coupPossible);
             }
         } else {
-            if (coupPossible != null && coupPossible.contains(hex.getCoordinate())) {
-                afficherIndices(false);
-                mainController.getModel().moveRing(selectedRing, hex.getCoordinate());
+            if (coupPossible != null && coupPossible.contains(hex.coordonnee)) {
+                getMainController().getModel().moveRing(selectedRing, hex.coordonnee);
                 selectedRing = null;
-                coupPossible = null;
-            }
-        }
-    }
-
-    private void afficherIndices(boolean visible) {
-        if (coupPossible != null) {
-            for (Coordinate c : coupPossible) {
-                HexSquare hexPossible = mainController.getHexSquare(c);
-                if (hexPossible != null) {
-                    hexPossible.showAccessibleMarker(visible); 
-                }
             }
         }
     }
 
     @Override
     public void entered(MouseEvent event, HexSquare hex) {
-    	
+
     }
 
     @Override
     public void exited(MouseEvent event, HexSquare hex) {
-    	
+
     }
-    
 }

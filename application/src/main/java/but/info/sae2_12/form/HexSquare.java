@@ -26,6 +26,7 @@ public class HexSquare extends Polygon {
     private static final double ZOOM = 32.0;
     private Color couleur;
     private Shape forme;
+    private Token token;
 
 
     private static final double LARGEUR = ZOOM * 2.0;
@@ -55,6 +56,7 @@ public class HexSquare extends Polygon {
         if (this.mainController != null && this.mainController.getModel() != null) {
             Token piece = this.mainController.getModel().getTokenAt(coordonnee);
             if (piece instanceof Pawn) {
+                token=piece;
                 Circle pion = new Circle(ZOOM * 0.5);
                 if(piece.getTeam().equals(Team.BLACK)){pion.setFill(Color.BLACK);}else{pion.setFill(Color.WHITE);}
                 pion.setStroke(Color.BLACK);
@@ -64,6 +66,7 @@ public class HexSquare extends Polygon {
                 this.forme = pion;
 
             } else if (piece instanceof Ring) {
+                token=piece;
                 Circle anneau = new Circle(ZOOM * 0.6);
                 anneau.setFill(Color.TRANSPARENT);
                 if(piece.getTeam().equals(Team.BLACK)){anneau.setStroke(Color.BLACK);}else{anneau.setStroke(Color.WHITE);}
@@ -84,11 +87,18 @@ public class HexSquare extends Polygon {
         });
 
         this.setOnMouseClicked(event -> {
-
+            if (mainController != null) {
+                mainController.getInteractionMode().handleClick(event, this);
+            }
+            this.setFill(this.couleur);
         });
     }
 
     public Shape getForme(){
         return this.forme;
+    }
+
+    public Token getToken() {
+        return token;
     }
 }

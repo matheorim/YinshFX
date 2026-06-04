@@ -9,6 +9,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
@@ -130,5 +131,73 @@ public class CentralController extends Polygon implements Initializable {
                 grille.getChildren().add(pieceGraphique);
             }
         }
+    }
+
+    public void refreshGrille(){
+        desinerGrille();
+    }
+
+    public void afficherIndice(Set<Coordinate> coord){
+        if (coord == null || coord.isEmpty()) return;
+        for (javafx.scene.Node node : grille.getChildren()) {
+
+            if (node instanceof HexSquare) {
+                HexSquare hex = (HexSquare) node;
+
+                if (coord.contains(hex.coordonnee)) {
+                    hex.setFill(javafx.scene.paint.Color.LIGHTGREEN);
+                    hex.setStroke(javafx.scene.paint.Color.RED);
+                    hex.setStrokeWidth(3.0);
+                }
+            }
+        }
+    }
+
+    public void setVerrouille(boolean b,Coordinate co){
+        if (co == null) return;
+        for (javafx.scene.Node node : grille.getChildren()) {
+
+            if (node instanceof HexSquare) {
+                HexSquare hex = (HexSquare) node;
+
+                if (co.equals(hex.coordonnee)) {
+                    hex.setFill(javafx.scene.paint.Color.RED);
+                    hex.setStroke(Color.BLACK);
+                    hex.setStrokeWidth(3.0);
+                }
+            }
+        }
+    }
+
+    public void setHighlight(boolean b, Set<Coordinate> co){
+        if (co == null) return;
+        if(b){
+            for (javafx.scene.Node node : grille.getChildren()) {
+
+                if (node instanceof HexSquare) {
+                    HexSquare hex = (HexSquare) node;
+
+                    if (co.contains(hex.coordonnee)) {
+                        hex.setFill(Color.BEIGE);
+                        hex.setStroke(Color.BLACK);
+                        hex.setStrokeWidth(3.0);
+                    }
+                }
+            }
+        }else{
+            for (javafx.scene.Node node : grille.getChildren()) {
+
+                if (node instanceof HexSquare) {
+                    HexSquare hex = (HexSquare) node;
+
+                    if (co.contains(hex.coordonnee)) {
+                        hex.setFill(couleurA);
+                        hex.setStroke(Color.BLACK);
+                        hex.setStrokeWidth(3.0);
+                    }
+                }
+            }
+        }
+
     }
 }

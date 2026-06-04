@@ -1,6 +1,9 @@
 package but.info.sae2_12.controllers.Interaction;
 
 import java.util.Set;
+
+import but.info.sae2_12.MainController;
+import but.info.sae2_12.form.HexSquare;
 import but.info.sae2_12.model.tokens.Ring;
 import coordinates.Coordinate;
 import javafx.scene.input.MouseEvent;
@@ -9,18 +12,18 @@ public class RemoveLine extends InteractionMode {
 
     private Set<Coordinate> lockedLine;
 
-    public RemoveLine(MainController mainController) {    
+    public RemoveLine(MainController mainController) {
         super(mainController);
     }
 
     @Override
     public void handleClick(MouseEvent event, HexSquare hex) {
         if (lockedLine == null) {
-            for (Set<Coordinate> line : mainController.getModel().getCurrentState().getLines()) {
-                if (line.contains(hex.getCoordinate())) {
+            for (Set<Coordinate> line : getMainController().getModel().getCurrentState().getLines()) {
+                if (line.contains(hex.coordonnee)) {
                     lockedLine = line;
                     for (Coordinate c : lockedLine) {
-                        mainController.getHexSquare(c).setVerrouille(true);
+                        getMainController().hexGridController.setVerrouille(true,hex.coordonnee);
                     }
                     break;
                 }
@@ -28,9 +31,9 @@ public class RemoveLine extends InteractionMode {
         } else {
             if (hex.getToken() instanceof Ring) {
                 for (Coordinate c : lockedLine) {
-                    mainController.getHexSquare(c).setVerrouille(false);
+                    getMainController().hexGridController.setVerrouille(false,hex.coordonnee);
                 }
-                mainController.getModel().removeLine(lockedLine, hex.getCoordinate());
+                getMainController().getModel().removeLine(lockedLine, hex.coordonnee);
                 lockedLine = null;
             }
         }
@@ -39,10 +42,10 @@ public class RemoveLine extends InteractionMode {
     @Override
     public void entered(MouseEvent event, HexSquare hex) {
         if (lockedLine == null) {
-            for (Set<Coordinate> line : mainController.getModel().getCurrentState().getLines()) {
-                if (line.contains(hex.getCoordinate())) {
+            for (Set<Coordinate> line : getMainController().getModel().getCurrentState().getLines()) {
+                if (line.contains(hex.coordonnee)) {
                     for (Coordinate c : line) {
-                        mainController.getHexSquare(c).setHighlight(true);
+                        getMainController().hexGridController.setHighlight(true,line);
                     }
                     break;
                 }
@@ -53,10 +56,10 @@ public class RemoveLine extends InteractionMode {
     @Override
     public void exited(MouseEvent event, HexSquare hex) {
         if (lockedLine == null) {
-            for (Set<Coordinate> line : mainController.getModel().getCurrentState().getLines()) {
-                if (line.contains(hex.getCoordinate())) {
+            for (Set<Coordinate> line : getMainController().getModel().getCurrentState().getLines()) {
+                if (line.contains(hex.coordonnee)) {
                     for (Coordinate c : line) {
-                        mainController.getHexSquare(c).setHighlight(false);
+                        getMainController().hexGridController.setHighlight(false,line);
                     }
                     break;
                 }
