@@ -28,9 +28,13 @@ public class CentralController extends Polygon implements Initializable {
     @FXML
     private Pane grille;
     private boolean afficherCoords = false;
+    public javafx.scene.paint.Color couleurC = javafx.scene.paint.Color.web("#E0E0E0");
+    public javafx.scene.paint.Color couleurB = javafx.scene.paint.Color.web("#A0A0A0");
+    public javafx.scene.paint.Color couleurA = javafx.scene.paint.Color.web("#707070");
 
     public void setController(MainController c){
         this.mainController=c;
+
         if (grille != null && grille.getWidth() > 0) {
             desinerGrille();
         }
@@ -59,6 +63,10 @@ public class CentralController extends Polygon implements Initializable {
         desinerGrille();
     }
 
+    public void setPartie(TypePartie mode){
+
+    }
+
     public void desinerGrille(){
         if (mainController == null || mainController.getModel() == null) return;
         Model model = mainController.getModel();
@@ -84,25 +92,23 @@ public class CentralController extends Polygon implements Initializable {
         double offsetX = ecranCentreX - plateauCentreX;
         double offsetY = ecranCentreY - plateauCentreY;
 
-        javafx.scene.paint.Color couleurC = javafx.scene.paint.Color.web("#E0E0E0");
-        javafx.scene.paint.Color couleurB = javafx.scene.paint.Color.web("#A0A0A0");
-        javafx.scene.paint.Color couleurA = javafx.scene.paint.Color.web("#707070");
+
 
         for (Coordinate coord : coordinatesListe) {
             javafx.scene.paint.Color couleurChoisie;
 
             switch (coord.to2DCoordinate().x()%3) {
                 case 0:
-                    couleurChoisie = couleurA;
+                    couleurChoisie = mainController.getCouleur1();
                     break;
                 case 1:
-                    couleurChoisie = couleurB;
+                    couleurChoisie = mainController.getCouleur2();
                     break;
                 case 2:
-                    couleurChoisie = couleurC;
+                    couleurChoisie = mainController.getCouleur3();
                     break;
                 default:
-                    couleurChoisie = couleurC;
+                    couleurChoisie = mainController.getCouleur3();
                     break;
             }
 

@@ -28,6 +28,11 @@ public class GameController {
 
 	public void setController(MainController c){
 		this.mainController=c;
+		if (this.mainController != null) {
+			pickerCouleur1.valueProperty().bindBidirectional(this.mainController.couleur1Property());
+			pickerCouleur2.valueProperty().bindBidirectional(this.mainController.couleur2Property());
+			pickerCouleur3.valueProperty().bindBidirectional(this.mainController.couleur3Property());
+		}
 	}
 	
 	private IFactory factory = new FactoryDoubled();
@@ -40,26 +45,22 @@ public class GameController {
 
 	@FXML
 	public void onPartieAleatoire() {
-		IState etat = factory.randomGame();
-		// TODO: mainController.getModel().setState(etat);
+		mainController.PartieAleatoire(TypePartie.ALEA);
 	}
 
 	@FXML
 	public void onEtatTest() {
-		IState etat = factory.testState();
-		// TODO: mainController.getModel().setState(etat);
+		mainController.PartieAleatoire(TypePartie.TEST);
 	}
 	
 	@FXML
 	public void onLigneBlanche() {
-		IState etat = factory.stateForWhiteLineTest();
-		// TODO: mainController.getModel().setState(etat);
+		mainController.PartieAleatoire(TypePartie.LIGNEBLANC);
 	}
 
 	@FXML
 	public void onLigneNoire() {
-		IState etat = factory.stateForBlackLineTest();
-		// TODO: mainController.getModel().setState(etat);
+		mainController.PartieAleatoire(TypePartie.LIGNENOIR);
 	}
 	
 	@FXML
@@ -74,19 +75,28 @@ public class GameController {
 	
 	@FXML
 	public void onActionCouleur1() {
-	    Color nouvelleCouleur = pickerCouleur1.getValue();
-	    // TODO: mainController.getModel().setCouleur1(nouvelleCouleur);
+		if (mainController != null) {
+			Color nouvelleCouleur = pickerCouleur1.getValue();
+			mainController.couleur1Property().setValue(nouvelleCouleur);
+			mainController.hexGridController.desinerGrille();
+		}
 	}
 
 	@FXML
 	public void onActionCouleur2() {
-	    Color nouvelleCouleur = pickerCouleur2.getValue();
-	    // TODO: mainController.getModel().setCouleur2(nouvelleCouleur);
+		if (mainController != null) {
+			Color nouvelleCouleur = pickerCouleur2.getValue();
+			mainController.couleur2Property().setValue(nouvelleCouleur);
+			mainController.hexGridController.desinerGrille();
+		}
 	}
 
 	@FXML
 	public void onActionCouleur3() {
-	    Color nouvelleCouleur = pickerCouleur3.getValue();
-	    // TODO: mainController.getModel().setCouleur3(nouvelleCouleur);
+		if (mainController != null) {
+			Color nouvelleCouleur = pickerCouleur3.getValue();
+			mainController.couleur3Property().setValue(nouvelleCouleur);
+			mainController.hexGridController.desinerGrille();
+		}
 	}
 }
