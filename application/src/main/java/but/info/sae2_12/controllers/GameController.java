@@ -1,15 +1,10 @@
 package but.info.sae2_12.controllers;
 
 import but.info.sae2_12.MainController;
-import but.info.sae2_12.form.HexSquare;
-import but.info.sae2_12.model.Team;
-import but.info.sae2_12.model.tokens.Pawn;
-import but.info.sae2_12.model.tokens.Ring;
-import but.info.sae2_12.model.tokens.Token;
+import but.info.sae2_12.controllers.Interaction.EditMode;
+import but.info.sae2_12.controllers.Interaction.GameMode;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
@@ -77,6 +72,15 @@ public class GameController {
 	    } else {
 	        choixEdition.setDisable(true);
 	    }
+		if (modeEdition.isSelected()) {
+			choixEdition.setDisable(false);
+			mainController.setInteractionMode(new EditMode(mainController));
+		} else {
+			choixEdition.setDisable(true);
+			mainController.setInteractionMode(new GameMode(mainController));
+		}
+		choixEdition.setDisable(!modeEdition.isSelected());
+		mainController.updateInteractionMode();
 	}
 	
 	@FXML
@@ -108,15 +112,18 @@ public class GameController {
 
 	public but.info.sae2_12.model.Team getSelectedTeam() {
 		RadioButton selected = (RadioButton) Team.getSelectedToggle();
-		System.out.println("Toggle Team sélectionné : '" + (selected != null ? selected.getText() : "null") + "'");
 		if (selected == null) return but.info.sae2_12.model.Team.BLACK;
 		return selected.getText().equals("Noir") ? but.info.sae2_12.model.Team.BLACK : but.info.sae2_12.model.Team.WHITE;
 	}
 
 	public boolean isAnneauSelected() {
 		RadioButton selected = (RadioButton) Token.getSelectedToggle();
-		System.out.println("Toggle Token sélectionné : '" + (selected != null ? selected.getText() : "null") + "'");
 		if (selected == null) return true;
 		return selected.getText().equals("Anneau");
 	}
+
+	public boolean isModeEdition() {
+		return modeEdition.isSelected();
+	}
+
 }

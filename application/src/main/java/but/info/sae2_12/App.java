@@ -18,7 +18,7 @@ public class App extends Application {
     public static String mode;
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("Main"), 1100, 700);
+        scene = new Scene(loadFXML("Main"), 1100, 750);
         MainController ctrl = getLoader("Main").getController();
         stage.setScene(scene);
         stage.show();

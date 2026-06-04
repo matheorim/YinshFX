@@ -23,18 +23,17 @@ public class RemoveLine extends InteractionMode {
                 if (line.contains(hex.coordonnee)) {
                     lockedLine = line;
                     for (Coordinate c : lockedLine) {
-                        getMainController().hexGridController.setVerrouille(true,hex.coordonnee);
+                        getMainController().hexGridController.setVerrouille(true, c);
                     }
                     break;
                 }
             }
         } else {
-            if (hex.getToken() instanceof Ring) {
-                for (Coordinate c : lockedLine) {
-                    getMainController().hexGridController.setVerrouille(false,hex.coordonnee);
-                }
+            if (hex.getToken() instanceof Ring ring
+                    && ring.getTeam() == getMainController().getModel().getTurn()) {
                 getMainController().getModel().removeLine(lockedLine, hex.coordonnee);
                 lockedLine = null;
+                getMainController().hexGridController.refreshGrille();
             }
         }
     }

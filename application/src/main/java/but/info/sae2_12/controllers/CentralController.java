@@ -145,7 +145,7 @@ public class CentralController extends Polygon implements Initializable {
                 HexSquare hex = (HexSquare) node;
 
                 if (coord.contains(hex.coordonnee)) {
-                    hex.setFill(javafx.scene.paint.Color.LIGHTGREEN);
+                    hex.setFill(hex.getCouleur());
                     hex.setStroke(javafx.scene.paint.Color.RED);
                     hex.setStrokeWidth(3.0);
                 }
@@ -191,7 +191,7 @@ public class CentralController extends Polygon implements Initializable {
                     HexSquare hex = (HexSquare) node;
 
                     if (co.contains(hex.coordonnee)) {
-                        hex.setFill(couleurA);
+                        hex.setFill(hex.getCouleur());
                         hex.setStroke(Color.BLACK);
                         hex.setStrokeWidth(3.0);
                     }

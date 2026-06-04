@@ -8,5 +8,4 @@
 
 <HBox maxWidth="Infinity" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="but.info.sae2_12.controllers.BottomController">
     <Label fx:id="currentTeam" text="TOUR" textAlignment="CENTER" HBox.hgrow="ALWAYS" maxWidth="Infinity" alignment="CENTER"/>
-    <Label fx:id="currentState" text="ETAT" textAlignment="CENTER" HBox.hgrow="ALWAYS" maxWidth="Infinity" alignment="CENTER"/>
 </HBox>

@@ -1,6 +1,7 @@
 package but.info.sae2_12.controllers;
 
 import but.info.sae2_12.MainController;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -18,7 +19,6 @@ public class BottomController {
     public MainController mainController;
 
     @FXML private Label currentTeam;
-    @FXML private Label currentState;
 
     /** <h1>JavaDoc écrite à la main :)</h1><br>
      * Assigne le contrôleur principal au BottomController
@@ -27,10 +27,19 @@ public class BottomController {
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
 
-        //TODO Lier currentTeam et currentState avec le MainController
+        if (this.mainController != null && this.mainController.getModel() != null && currentTeam != null) {
 
+            currentTeam.textProperty().bind(Bindings.createStringBinding(() -> {
 
+                if (this.mainController.getModel().getCurrentState() != null &&
+                        this.mainController.getModel().getTurn() != null) {
+
+                    return this.mainController.getModel().getTurn().toString();
+                }
+                return "Pas de partie en cours";
+
+            }, this.mainController.getModel().currentStateProperty()));
+
+        }
     }
-
-
 }

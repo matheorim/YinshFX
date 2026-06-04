@@ -101,4 +101,8 @@ public class HexSquare extends Polygon {
     public Token getToken() {
         return token;
     }
+
+    public Color getCouleur() {
+        return couleur;
+    }
 }

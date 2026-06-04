@@ -19,14 +19,14 @@ public class EditMode extends InteractionMode {
 		if (event.getButton() == MouseButton.SECONDARY) {
 			getMainController().getModel().removeToken(hex.coordonnee);
 		} else if (event.getButton() == MouseButton.PRIMARY) {
-			Team equipe = getMainController().getModel().getTurn();
+			Team equipe = getMainController().gameController.getSelectedTeam();
 			Token nouveau;
-			if (getMainController().getModel().getTokenAt(hex.coordonnee) instanceof Ring) {
+			if (getMainController().gameController.isAnneauSelected()) {
 				nouveau = new Ring(equipe);
 			} else {
 				nouveau = new Pawn(equipe);
 			}
-			getMainController().getModel().toggleToken(hex.coordonnee,nouveau.getClass(),equipe);
+			getMainController().getModel().toggleToken(hex.coordonnee, nouveau.getClass(), equipe);
 		}
 		getMainController().hexGridController.refreshGrille();
 	}

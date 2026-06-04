@@ -1,10 +1,10 @@
 package but.info.sae2_12;
 
-import but.info.sae2_12.controllers.CentralController;
-import but.info.sae2_12.controllers.GameController;
+import but.info.sae2_12.controllers.*;
 import but.info.sae2_12.controllers.Interaction.EditMode;
+import but.info.sae2_12.controllers.Interaction.GameMode;
 import but.info.sae2_12.controllers.Interaction.InteractionMode;
-import but.info.sae2_12.controllers.TypePartie;
+import but.info.sae2_12.controllers.Interaction.RemoveLine;
 import but.info.sae2_12.model.Model;
 import but.info.sae2_12.model.factory.FactoryDoubled;
 import but.info.sae2_12.model.factory.IFactory;
@@ -22,8 +22,12 @@ public class MainController implements Initializable {
     public CentralController hexGridController;
     @FXML
     public GameController gameController;
-    private InteractionMode interactionMode = new EditMode(this);
+    private InteractionMode interactionMode = new GameMode(this);
 
+    @FXML
+    public BottomController bottomController;
+    @FXML
+    MenuController menuController;
 
     private Model model;
 
@@ -45,6 +49,13 @@ public class MainController implements Initializable {
         if (gameController != null) {
             gameController.setController(this);
         }
+        if (bottomController != null) {
+            bottomController.setMainController(this);
+        }
+        if (menuController != null) {
+            menuController.setMainController(this);
+        }
+        updateInteractionMode();
     }
 
     public Model getModel() {
@@ -66,6 +77,7 @@ public class MainController implements Initializable {
             case LIGNENOIR -> this.model=new Model(factory.stateForBlackLineTest());
             default -> this.model=new Model(factory.emptyState());
         }
+        updateInteractionMode();
         hexGridController.desinerGrille();
     }
 
@@ -99,5 +111,16 @@ public class MainController implements Initializable {
 
     public void setInteractionMode(InteractionMode mode) {
         this.interactionMode = mode;
+    }
+
+    public void updateInteractionMode() {
+        if (gameController.isModeEdition()) {
+            setInteractionMode(new EditMode(this));
+        } else if (model.getCurrentState().getLines() != null
+                && !model.getCurrentState().getLines().isEmpty()) {
+            setInteractionMode(new RemoveLine(this));
+        } else {
+            setInteractionMode(new GameMode(this));
+        }
     }
 }

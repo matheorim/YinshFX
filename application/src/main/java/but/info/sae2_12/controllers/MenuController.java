@@ -1,134 +1,124 @@
 package but.info.sae2_12.controllers;
 
 import but.info.sae2_12.MainController;
+import but.info.sae2_12.model.state.IState;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.stage.FileChooser;
+import javafx.stage.Window;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.StandardOpenOption;
-import java.util.Arrays;
+import java.io.*;
 
 public class MenuController {
 
-    public MainController mainController;
+    private MainController mainController;
 
+    @FXML private MenuBar menuBar;
     @FXML private MenuItem aPropos;
     @FXML private MenuItem charger;
     @FXML private MenuItem sauvegarderSous;
+    @FXML private MenuItem quitter;
 
-    /** Assigne le contrôleur principal au BottomController
-     * @param mainController le contrôleur principal
+    /**
+     * Reçoit la référence du MainController
      */
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
-
-        //TODO Lier currentTeam et currentState avec le MainController
-
-        aPropos.setOnAction(e -> {
-            Alert alerte = new Alert(Alert.AlertType.INFORMATION);
-            alerte.setTitle("À propos");
-            alerte.setHeaderText("Information");
-            alerte.setContentText("Groupe 1 :\n\t- LANGLOIS Kylian\n\t- MATHIEU Alix\n\t- FRAISSE Eliot\n\t- RIMBAULT Matheo\n\t- QUAGHEBEUR Noah");
-
-            alerte.show();
-        });
     }
 
-    /**
-     * Sauvegarde la partie actuelle en demandant à l'utilisateur où placer le fichier. <br>
-     * Enregistre tout d'abord un Magic Word pour vérifier l'état du fichier,
-     * puis enregistre l'état global de la partie, puis l'état du terrain.
-     */
+    @FXML
+    public void onAPropos() {
+        Alert alerte = new Alert(Alert.AlertType.INFORMATION);
+        alerte.setTitle("À propos");
+        alerte.setHeaderText("YINSH - SAE 2.12");
+        alerte.setContentText("Développé par :\n\t- LANGLOIS Kylian\n\t- MATHIEU Alix\n\t- FRAISSE Eliot\n\t- RIMBAULT Matheo\n\t- QUAGHEBEUR Noah");
+        alerte.showAndWait();
+    }
+
+    @FXML
     public void onsauvegarderSous() {
-        //TODO Créer le système de sauvegarde
+        if (mainController == null || mainController.getModel() == null) {
+            afficherErreur("Erreur critique", "Le contrôleur principal ou le modèle n'est pas initialisé.");
+            return;
+        }
 
         FileChooser fc = new FileChooser();
+        fc.setTitle("Sauvegarder la partie");
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichier YINSH (*.yns)", "*.yns"));
 
-        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Sauvegarde de partie (.yns, .yin)", "*.yns","*.yin");
-        fc.getExtensionFilters().add(filter);
+        Window window = null;
+        if (menuBar != null && menuBar.getScene() != null) {
+            window = menuBar.getScene().getWindow();
+        }
 
-        fc.setTitle("sauvegarderSous la partie");
-        File save = fc.showSaveDialog(sauvegarderSous.getParentPopup().getOwnerWindow());
+        File file = fc.showSaveDialog(window);
 
-        addMagicWord(save);
+        if (file != null) {
+            try (FileOutputStream fos = new FileOutputStream(file);
+                 ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 
-        //TODO Faire le reste de la sauvegarde d'une partie
+                oos.writeUTF("SAE212");
+
+                oos.writeObject(mainController.getModel().getCurrentState());
+                System.out.println("Partie sauvegardée avec succès !");
+
+            } catch (IOException e) {
+                afficherErreur("Erreur de sauvegarde", "Impossible d'écrire dans le fichier : " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
     }
 
-    /**
-     * Demande le fichier de sauvegarde de la partie à charger à l'utilisateur. <br>
-     * Charge ensuite la partie en faisant des appels aux méthodes du {@code mainController} de la classe.
-     */
+    @FXML
     public void onCharger() {
+
         FileChooser fc = new FileChooser();
-
-        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Sauvegarde de partie (.yns, .yin)", "*.yns", "*.yin"); // Création des filtres d'extensions
-        fc.getExtensionFilters().add(filter); // Ajout des filtres d'extensions au FileChooser
-
         fc.setTitle("Charger une partie");
-        File save = fc.showOpenDialog(charger.getParentPopup().getOwnerWindow());
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichier YINSH (*.yns)", "*.yns"));
 
-        // Si la lecture du Magic Word n'a pas fonctionné on prévient l'utilisateur
-        if (!checkMagicWord(save)) {
-            Alert alerte = new Alert(Alert.AlertType.ERROR);
-            alerte.setTitle("Attention !");
-            alerte.setHeaderText("Partie corrompue");
-            alerte.setContentText("Votre partie a été corrompue et n'a pas pu être chargée.");
-            alerte.showAndWait();
+        Window window = null;
+        if (menuBar != null && menuBar.getScene() != null) {
+            window = menuBar.getScene().getWindow();
         }
 
-        //TODO Vérifier la signature
-    }
+        File file = fc.showOpenDialog(window);
 
-    /**
-     * Ajoute le Magic Word (SAE212) au fichier de sauvegarde {@code file}.
-     * @param file le fichier de sauvegarde dans lequel ajouter le Magic Word.
-     */
-    private void addMagicWord(File file) {
-        String s = "SAE212";
-        byte[] data = s.getBytes(StandardCharsets.UTF_8);
+        if (file != null) {
+            try (FileInputStream fis = new FileInputStream(file);
+                 ObjectInputStream ois = new ObjectInputStream(fis)) {
 
-        try (BufferedOutputStream out = new BufferedOutputStream(Files.newOutputStream(
-                file.getAbsoluteFile().toPath(),
-                StandardOpenOption.CREATE,
-                StandardOpenOption.WRITE)
-        )) {
+                String magic = ois.readUTF();
+                if (!"SAE212".equals(magic)) {
+                    afficherErreur("Fichier invalide", "Ce fichier n'est pas une sauvegarde YINSH valide.");
+                    return;
+                }
 
-            out.write(data, 0, data.length);
+                IState etatCharge = (IState) ois.readObject();
 
-        } catch (IOException e) {
-            System.err.println(e);
+                mainController.getModel().setCurrentState(etatCharge);
+                System.out.println("Partie chargée avec succès !");
+
+            } catch (Exception e) {
+                afficherErreur("Erreur de chargement", "Le fichier est corrompu ou incompatible : " + e.getMessage());
+                e.printStackTrace();
+            }
         }
     }
 
-    /**
-     * Vérifie l'intégrité du fichier de sauvegarde {@code file} en vérifiant le Magic Word au tout début de celui-ci.
-     * @param file le fichier de sauvegarde à vérifier.
-     * @return {@code true} si le fichier n'est pas corrompu/bonne extension et que le Magic Word apparaît au 6 premiers octets du fichier, {@code false} dans le cas contraire.
-     */
-    private boolean checkMagicWord(File file) {
-        String s = "SAE212";
-        byte[] bytes = new byte[s.length()];
-
-        try(FileInputStream fis = new FileInputStream(file)) {
-
-            fis.read(bytes);
-            fis.close();
-
-//            System.out.println(Arrays.toString(s.getBytes(StandardCharsets.UTF_8)) + " : " + Arrays.toString(bytes));
-
-            return (Arrays.toString(s.getBytes()).equals(Arrays.toString(bytes)));
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    @FXML
+    public void onQuit() {
+        Platform.exit();
+        System.exit(0);
     }
 
+    private void afficherErreur(String titre, String message) {
+        Alert alerte = new Alert(Alert.AlertType.ERROR);
+        alerte.setTitle(titre);
+        alerte.setHeaderText(null);
+        alerte.setContentText(message);
+        alerte.showAndWait();
+    }
 }
