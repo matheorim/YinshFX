@@ -5,6 +5,7 @@ import java.util.Set;
 import but.info.sae2_12.model.tokens.Ring;
 import coordinates.Coordinate;
 import javafx.scene.input.MouseEvent;
+import but.info.sae2_12.MainController;
 
 public class GameMode extends InteractionMode{
 	
