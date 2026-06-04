@@ -3,6 +3,7 @@ package but.info.sae2_12.controllers.IA;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import but.info.sae2_12.AI.MiniMax;
 import but.info.sae2_12.model.Team;
 import but.info.sae2_12.model.state.IState;
 import javafx.fxml.FXML;
@@ -24,7 +25,11 @@ public class IAController implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+		NombreDAnneau.setText("5");
+		ScoreVictoire.setText("100 000");
+		LigneDeQuatre.setText("50");
+		AnneauRetire.setText("1000");
+		pion.setText("10");
 		ProgressBar.setProgress(0.5);
 		
 	}
