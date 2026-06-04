@@ -15,8 +15,8 @@ public class Vainqueur {
 		return vainqueur;
 	}
 	
-	private void verifierVainqueur(IState State) {
-		Team gagnant = ((State) State).winner();
+	public void verifierVainqueur(State State) {
+		Team gagnant =  State.winner();
 	    if (gagnant != null) {
 	        vainqueur.set(true);
 	        Alert alert = new Alert(Alert.AlertType.INFORMATION);

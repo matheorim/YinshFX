@@ -7,7 +7,7 @@ public abstract class InteractionMode {
 	
 	private MainController mainController;
 	
-	public InteractionMode(MainController maincontroller) {
+	public InteractionMode(MainController mainController) {
 		this.mainController = mainController ;
 	}
 	

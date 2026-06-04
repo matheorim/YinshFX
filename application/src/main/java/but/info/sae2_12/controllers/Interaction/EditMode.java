@@ -12,7 +12,8 @@ public class EditMode extends InteractionMode {
 		if (event.getButton() == MouseButton.SECONDARY) {
 			mainController.getModel().removeToken(hex.getCoordinates());
 		} else if (event.getButton() == MouseButton.PRIMARY) {
-			mainController.getModel().toggleToken(hex.getCoordinate(), 
+			mainController.getModel().toggleToken(
+			hex.getCoordinate(), 
 		    mainController.getSelectedTokenClass(), 
 		    mainController.getSelectedTeam());
 		}
