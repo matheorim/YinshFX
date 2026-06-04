@@ -1,4 +1,3 @@
-Java
 
 package but.info.sae2_12.controllers.Interaction;
 
