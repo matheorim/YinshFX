@@ -24,7 +24,7 @@ public class BottomController {
     @FXML private MenuItem charger;
     @FXML private MenuItem sauvegarder;
 
-    /** JavaDoc écrite à la main :)<br />
+    /** <h1>JavaDoc écrite à la main :)</h1><br>
      * Assigne le contrôleur principal au BottomController
      * @param mainController le contrôleur principal
      */
@@ -44,9 +44,9 @@ public class BottomController {
     }
 
     /**
-     * Sauvegarde de la partie actuelle en demandant à l'utilisateur où placer le fichier. <br>
+     * Sauvegarde la partie actuelle en demandant à l'utilisateur où placer le fichier. <br>
      * Enregistre tout d'abord un Magic Word pour vérifier l'état du fichier,
-     * puis enregistre l'état global de la partie,
+     * puis enregistre l'état global de la partie, puis l'état du terrain.
      */
     public void onSauvegarder() {
         //TODO Créer le système de sauvegarde
