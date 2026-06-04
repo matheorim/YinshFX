@@ -12,6 +12,8 @@ public class GameController {
 	@FXML private Button etatTest;
 	@FXML private Button ligneBlanche;
 	@FXML private Button ligneNoire;
+	@FXML private CheckBox modeEdition;
+	@FXML private HBox choixEdition;
 	
 	private IFactory factory = new FactoryDoubled();		
 
@@ -37,6 +39,16 @@ public class GameController {
 	private void onLigneNoire() {
 		IState etat = factory.stateForBlackLineTest();
 		// TODO: mainController.getModel().setState(etat);
+	}
+	
+	@FXML
+	private void onToggleModeEdition() {
+	    if (modeEdition.isSelected()) {
+	        choixEdition.setDisable(false);
+	    } else {
+	        choixEdition.setDisable(true);
+	    }
+	    // TODO: mainController.getModel().isEditModeProperty().set(modeEdition.isSelected());
 	}
 	
 }
