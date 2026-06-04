@@ -18,13 +18,18 @@ public class App extends Application {
     public static String mode;
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("Main"), 640, 480);
+        scene = new Scene(loadFXML("Main"), 1100, 700);
+        MainController ctrl = getLoader("Main").getController();
         stage.setScene(scene);
         stage.show();
     }
 
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
+    }
+
+    private FXMLLoader getLoader(String fxml){
+        return new FXMLLoader(App.class.getResource(fxml + ".fxml"));
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
