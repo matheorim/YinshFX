@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="but.info.sae2_12.controllers.GameController">
+<VBox fx:id="game" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="but.info.sae2_12.controllers.GameController">
 	<children>
 		<Button fx:id="partieAleatoire" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onPartieAleatoire" text="Partie aléatoire">
 			<padding>
@@ -46,13 +46,17 @@
 			</VBox.margin>
 		</Button>
 
-		<CheckBox fx:id="modeEdition" mnemonicParsing="false" onAction="#onToggleModeEdition" text="Mode Édition">
-			<VBox.margin>
-				<Insets bottom="10.0" left="15.0" top="10.0" />
-			</VBox.margin>
-		</CheckBox>
+		<HBox alignment="CENTER">
+			<CheckBox fx:id="modeEdition" mnemonicParsing="false" onAction="#onToggleModeEdition" text="Mode Édition">
+				<VBox.margin>
+					<Insets bottom="10.0" left="15.0" top="10.0" />
+				</VBox.margin>
+			</CheckBox>
+			<CheckBox fx:id="activeCoord" text="Coordonnées" onAction="#onToggleCoord"/>
+		</HBox>
 
-		<HBox id="choixEdition" alignment="CENTER" spacing="10.0">
+
+		<HBox fx:id="choixEdition" alignment="CENTER" spacing="10.0">
 			<children>
 				<RadioButton mnemonicParsing="false" text="Anneau">
 					<toggleGroup>

@@ -1,4 +1,4 @@
-package but.info.sae2_12.Controllers;
+package but.info.sae2_12.controllers;
 
 import but.info.sae2_12.MainController;
 import but.info.sae2_12.form.HexSquare;
@@ -54,6 +54,11 @@ public class CentralController extends Polygon implements Initializable {
         });
     }
 
+    public void setAfficherCoords(boolean afficher) {
+        this.afficherCoords = afficher;
+        desinerGrille();
+    }
+
     public void desinerGrille(){
         if (mainController == null || mainController.getModel() == null) return;
         Model model = mainController.getModel();
@@ -63,7 +68,7 @@ public class CentralController extends Polygon implements Initializable {
         if (coordinatesListe.isEmpty()) return;
 
         double sommeX = 0;
-        double sommeY = 300;
+        double sommeY = 360;
         for (Coordinate coord : coordinatesListe) {
             sommeX += coord.to2DCoordinate().x();
             sommeY += coord.to2DCoordinate().y();
@@ -84,20 +89,21 @@ public class CentralController extends Polygon implements Initializable {
         javafx.scene.paint.Color couleurA = javafx.scene.paint.Color.web("#707070");
 
         for (Coordinate coord : coordinatesListe) {
-            int col = coord.to2DCoordinate().x() / 2;
-            int lig = coord.to2DCoordinate().y();
-
-
-            int indexCouleur = ((col - lig) % 3 + 3) % 3;
-
             javafx.scene.paint.Color couleurChoisie;
 
-            if (indexCouleur == 0) {
-                couleurChoisie = couleurA;
-            } else if (indexCouleur == 1) {
-                couleurChoisie = couleurB;
-            } else {
-                couleurChoisie = couleurC;
+            switch (coord.to2DCoordinate().x()%3) {
+                case 0:
+                    couleurChoisie = couleurA;
+                    break;
+                case 1:
+                    couleurChoisie = couleurB;
+                    break;
+                case 2:
+                    couleurChoisie = couleurC;
+                    break;
+                default:
+                    couleurChoisie = couleurC;
+                    break;
             }
 
             HexSquare hex = new HexSquare(coord, couleurChoisie,mainController);
@@ -122,18 +128,5 @@ public class CentralController extends Polygon implements Initializable {
                 grille.getChildren().add(pieceGraphique);
             }
         }
-        CheckBox cbUnique = new CheckBox("Coordonnées");
-        cbUnique.setSelected(afficherCoords);
-        cbUnique.setLayoutX(20);
-        cbUnique.setLayoutY(grille.getHeight() - 30);
-        cbUnique.setTranslateX(0);
-        cbUnique.setTranslateY(0);
-
-        cbUnique.setOnAction(event -> {
-            this.afficherCoords = cbUnique.isSelected();
-            desinerGrille();
-        });
-
-        grille.getChildren().add(cbUnique);
     }
 }

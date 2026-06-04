@@ -1,6 +1,6 @@
 package but.info.sae2_12.form;
 
-import but.info.sae2_12.Controllers.CentralController;
+import but.info.sae2_12.controllers.CentralController;
 import but.info.sae2_12.MainController;
 import but.info.sae2_12.model.Team;
 import but.info.sae2_12.model.tokens.Pawn;

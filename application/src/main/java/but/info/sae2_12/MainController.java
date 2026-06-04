@@ -1,6 +1,7 @@
 package but.info.sae2_12;
 
-import but.info.sae2_12.Controllers.CentralController;
+import but.info.sae2_12.controllers.CentralController;
+import but.info.sae2_12.controllers.GameController;
 import but.info.sae2_12.model.Model;
 import but.info.sae2_12.model.factory.FactoryDoubled;
 import but.info.sae2_12.model.factory.IFactory;
@@ -16,6 +17,8 @@ public class MainController implements Initializable {
 
     @FXML
     public CentralController hexGridController;
+    @FXML
+    public GameController gameController;
 
     private Model model;
 
@@ -23,17 +26,24 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if(hexGridController==null) return;
-
         IFactory factory = new FactoryDoubled();
-        this.model=new Model(factory.testState());
+        this.model=new Model(factory.emptyState());
         if (hexGridController != null) {
             hexGridController.setController(this);
             hexGridController.desinerGrille();
+        }
+        if (gameController != null) {
+            gameController.setController(this);
         }
     }
 
     public Model getModel() {
         return this.model;
+    }
+
+    public void selectionnerAffichageCoordonnees(boolean active) {
+        if (hexGridController != null) {
+            hexGridController.setAfficherCoords(active);
+        }
     }
 }
