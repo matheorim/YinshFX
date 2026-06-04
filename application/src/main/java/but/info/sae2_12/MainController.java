@@ -13,7 +13,6 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("coucou");
         if (bottomController != null) bottomController.setMainController(this);
     }
 }

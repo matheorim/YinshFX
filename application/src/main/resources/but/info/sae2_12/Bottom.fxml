@@ -17,8 +17,8 @@
                 <MenuItem text="À propos" fx:id="aPropos" />
             </Menu>
             <Menu text="Fichier">
-                <MenuItem text="Charger" fx:id="charger" />
-                <MenuItem text="Sauvegarder" fx:id="sauvegarder" />
+                <MenuItem text="Charger" fx:id="charger" onAction="#onCharger" />
+                <MenuItem text="Sauvegarder" fx:id="sauvegarder" onAction="#onSauvegarder" />
             </Menu>
         </menus>
     </MenuBar>
