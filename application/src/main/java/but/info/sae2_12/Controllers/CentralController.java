@@ -20,7 +20,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-import static java.awt.SystemColor.text;
 
 public class CentralController extends Polygon implements Initializable {
     private MainController mainController;
