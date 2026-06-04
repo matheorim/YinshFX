@@ -10,12 +10,8 @@ import javafx.stage.FileChooser;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
-import java.util.Objects;
-import java.util.Scanner;
 
 public class BottomController {
 
@@ -28,6 +24,10 @@ public class BottomController {
     @FXML private MenuItem charger;
     @FXML private MenuItem sauvegarder;
 
+    /** JavaDoc écrite à la main :)<br />
+     * Assigne le contrôleur principal au BottomController
+     * @param mainController le contrôleur principal
+     */
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
 
@@ -43,6 +43,11 @@ public class BottomController {
         });
     }
 
+    /**
+     * Sauvegarde de la partie actuelle en demandant à l'utilisateur où placer le fichier. <br>
+     * Enregistre tout d'abord un Magic Word pour vérifier l'état du fichier,
+     * puis enregistre l'état global de la partie,
+     */
     public void onSauvegarder() {
         //TODO Créer le système de sauvegarde
 
@@ -59,6 +64,10 @@ public class BottomController {
         //TODO Faire le reste de la sauvegarde d'une partie
     }
 
+    /**
+     * Demande le fichier de sauvegarde de la partie à charger à l'utilisateur. <br>
+     * Charge ensuite la partie en faisant des appels aux méthodes du {@code mainController} de la classe.
+     */
     public void onCharger() {
         FileChooser fc = new FileChooser();
 
@@ -80,6 +89,10 @@ public class BottomController {
         //TODO Vérifier la signature
     }
 
+    /**
+     * Ajoute le Magic Word (SAE212) au fichier de sauvegarde {@code file}.
+     * @param file le fichier de sauvegarde dans lequel ajouter le Magic Word.
+     */
     private void addMagicWord(File file) {
         String s = "SAE212";
         byte[] data = s.getBytes(StandardCharsets.UTF_8);
@@ -97,6 +110,11 @@ public class BottomController {
         }
     }
 
+    /**
+     * Vérifie l'intégrité du fichier de sauvegarde {@code file} en vérifiant le Magic Word au tout début de celui-ci.
+     * @param file le fichier de sauvegarde à vérifier.
+     * @return {@code true} si le fichier n'est pas corrompu/bonne extension et que le Magic Word apparaît au 6 premiers octets du fichier, {@code false} dans le cas contraire.
+     */
     private boolean checkMagicWord(File file) {
         String s = "SAE212";
         byte[] bytes = new byte[s.length()];
