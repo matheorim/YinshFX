@@ -26,7 +26,7 @@ public class MainController implements Initializable {
         if(hexGridController==null) return;
 
         IFactory factory = new FactoryDoubled();
-        this.model=new Model(factory.emptyState());
+        this.model=new Model(factory.testState());
         if (hexGridController != null) {
             hexGridController.setController(this);
             hexGridController.desinerGrille();

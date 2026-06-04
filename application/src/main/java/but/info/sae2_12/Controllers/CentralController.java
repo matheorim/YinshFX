@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 
 import java.net.URL;
@@ -26,7 +27,7 @@ public class CentralController extends Polygon implements Initializable {
 
     @FXML
     private Pane grille;
-    private boolean afficherCoords = true;
+    private boolean afficherCoords = false;
 
     public void setController(MainController c){
         this.mainController=c;
@@ -99,18 +100,26 @@ public class CentralController extends Polygon implements Initializable {
                 couleurChoisie = couleurC;
             }
 
-            HexSquare hex = new HexSquare(coord, couleurChoisie);
+            HexSquare hex = new HexSquare(coord, couleurChoisie,mainController);
             hex.setTranslateX(offsetX);
             hex.setTranslateY(offsetY);
 
             if (afficherCoords){
                 Text text = new Text(coord.toString());
+                text.setMouseTransparent(true);
                 text.setLayoutX(hex.getLayoutX() + offsetX - 15);
                 text.setLayoutY(hex.getLayoutY() + offsetY + 5);
                 grille.getChildren().addAll(hex,text);
             }else {
                 Text text = new Text("");
+                text.setMouseTransparent(true);
                 grille.getChildren().addAll(hex,text);
+            }
+            Shape pieceGraphique = hex.getForme();
+            if (pieceGraphique != null) {
+                pieceGraphique.setTranslateX(offsetX);
+                pieceGraphique.setTranslateY(offsetY);
+                grille.getChildren().add(pieceGraphique);
             }
         }
         CheckBox cbUnique = new CheckBox("Coordonnées");
