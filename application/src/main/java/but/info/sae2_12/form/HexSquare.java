@@ -16,8 +16,6 @@ import javafx.scene.shape.Shape;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-import java.awt.*;
-
 import static javafx.scene.text.Font.font;
 
 public class HexSquare extends Polygon {

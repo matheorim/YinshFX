@@ -8,10 +8,7 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
@@ -20,7 +17,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-import static java.awt.SystemColor.text;
 
 public class CentralController extends Polygon implements Initializable {
     private MainController mainController;
