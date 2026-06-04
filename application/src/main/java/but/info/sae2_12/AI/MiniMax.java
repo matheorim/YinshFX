@@ -193,17 +193,17 @@ public class MiniMax {
         int aiRings = state.rings().get(aiTeam).size();
         int opponentRings = state.rings().get(opponent).size();
 
-        if (aiRings <= 2) return WIN_SCORE.get();      // L'IA a retiré 3 anneaux 
-        if (opponentRings <= 2) return -WIN_SCORE.get();     // L'adversaire a retiré 3 anneaux 
+        if (aiRings <= 2) return getWinScore().get();      // L'IA a retiré 3 anneaux 
+        if (opponentRings <= 2) return -getWinScore().get();     // L'adversaire a retiré 3 anneaux 
 
         double score = 0.0;
-        score += (INITIAL_RINGS.get() - aiRings) * RING_REMOVED_WEIGHT.get();
-        score -= (INITIAL_RINGS.get() - opponentRings) * RING_REMOVED_WEIGHT.get();
+        score += (getInitialRings().get() - aiRings) * getRingRemovedWeight().get();
+        score -= (getInitialRings().get() - opponentRings) * getRingRemovedWeight().get();
 
         // Pions
         for (var entry : state.board().entrySet()) {
             if (entry.getValue() instanceof Pawn pawn) {
-                score += (pawn.getTeam() == aiTeam) ? PAWN_WEIGHT.get() : -PAWN_WEIGHT.get();
+                score += (pawn.getTeam() == aiTeam) ? getPawnWeight().get() : -getPawnWeight().get();
             }
         }
 
@@ -211,12 +211,12 @@ public class MiniMax {
         score += state.getLines().stream()
                 .filter(line -> line.stream().allMatch(c ->
                         state.board().get(c) instanceof Pawn p && p.getTeam() == aiTeam))
-                .count() * NEAR_LINE_WEIGHT.get();
+                .count() * getNearLineWeight().get();
 
         score -= state.getLines().stream()
                 .filter(line -> line.stream().allMatch(c ->
                         state.board().get(c) instanceof Pawn p && p.getTeam() == opponent))
-                .count() * NEAR_LINE_WEIGHT.get();
+                .count() * getNearLineWeight().get();
 
         // Nb de coups
         long aiMobility = state.rings().get(aiTeam).stream()
@@ -262,4 +262,24 @@ public class MiniMax {
             return null;
         }
     }
+
+	public static SimpleIntegerProperty getInitialRings() {
+		return INITIAL_RINGS;
+	}
+
+	public static SimpleDoubleProperty getWinScore() {
+		return WIN_SCORE;
+	}
+
+	public static SimpleDoubleProperty getRingRemovedWeight() {
+		return RING_REMOVED_WEIGHT;
+	}
+
+	public static SimpleDoubleProperty getNearLineWeight() {
+		return NEAR_LINE_WEIGHT;
+	}
+
+	public static SimpleDoubleProperty getPawnWeight() {
+		return PAWN_WEIGHT;
+	}
 }
