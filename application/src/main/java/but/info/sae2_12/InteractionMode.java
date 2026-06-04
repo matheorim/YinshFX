@@ -8,7 +8,7 @@ public abstract class InteractionMode {
 
     public abstract void handleClick(MouseEvent e, HexSquare hexSquare);
     public abstract void entered(MouseEvent e, HexSquare hexSquare);
-    public abstract void exited(MouseEvent e, HexSquare hexSquare);
+    public abstract void exited(MouseEvent e, HexSquare hexSquare); 
 
 
 }
