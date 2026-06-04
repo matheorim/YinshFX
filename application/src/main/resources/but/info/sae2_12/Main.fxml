@@ -52,6 +52,6 @@
     <fx:include fx:id="hexGrid" source="controllers/CentralController.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
   </center>
   <bottom>
-
+    <fx:include fx:id="bottom"  source="controllers/BottomController.fxml" />
   </bottom>
 </BorderPane>
