@@ -56,6 +56,7 @@ public class BottomController {
 
         addMagicWord(save);
 
+        //TODO Faire le reste de la sauvegarde d'une partie
     }
 
     public void onCharger() {
@@ -80,7 +81,7 @@ public class BottomController {
     }
 
     private void addMagicWord(File file) {
-        String s = "SAE213";
+        String s = "SAE212";
         byte[] data = s.getBytes(StandardCharsets.UTF_8);
 
         try (BufferedOutputStream out = new BufferedOutputStream(Files.newOutputStream(
