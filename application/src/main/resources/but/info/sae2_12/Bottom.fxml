@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox maxWidth="Infinity" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="but.info.sae2_12.controllers.BottomController">
+    <Label fx:id="currentTeam" text="TOUR" textAlignment="CENTER" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+    <Label fx:id="currentState" text="ETAT" textAlignment="CENTER" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+
+
+    <MenuBar HBox.hgrow="ALWAYS">
+        <menus>
+            <Menu text="À propos">
+                <MenuItem text="À propos" fx:id="aPropos" />
+            </Menu>
+            <Menu text="Fichier">
+                <MenuItem text="Charger" fx:id="charger" />
+                <MenuItem text="Sauvegarder" fx:id="sauvegarder" />
+            </Menu>
+        </menus>
+    </MenuBar>
+</HBox>
