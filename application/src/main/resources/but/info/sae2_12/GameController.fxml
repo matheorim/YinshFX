@@ -3,92 +3,93 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="but.info.sae2_12.controllers.GameController">
+<VBox alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="but.info.sae2_12.controllers.GameController">
 	<children>
-		<Button fx:id="partieAleatoire" lineSpacing="10.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onPartieAleatoire" text="Partie aléatoire">
+		<Button fx:id="partieAleatoire" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onPartieAleatoire" text="Partie aléatoire">
 			<padding>
 				<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
 			</padding>
 			<VBox.margin>
-				<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+				<Insets bottom="5.0" left="10.0" right="10.0" top="10.0" />
 			</VBox.margin>
 		</Button>
-		<Button fx:id="etatTest" lineSpacing="10.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onEtatTest" text="État test">
+		<Button fx:id="etatTest" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onEtatTest" text="État test">
 			<padding>
 				<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
 			</padding>
 			<VBox.margin>
-				<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+				<Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
 			</VBox.margin>
 		</Button>
-		<Button fx:id="ligneBlanche" lineSpacing="10.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onLigneBlanche" text="Ligne blanche">
+		<Button fx:id="ligneBlanche" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onLigneBlanche" text="Ligne blanche">
 			<padding>
 				<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
 			</padding>
 			<VBox.margin>
-				<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+				<Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
 			</VBox.margin>
 		</Button>
-		<Button fx:id="ligneNoire" lineSpacing="10.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onLigneNoire" text="Ligne noire">
+		<Button fx:id="ligneNoire" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onLigneNoire" text="Ligne noire">
 			<padding>
 				<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
 			</padding>
 			<VBox.margin>
-				<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+				<Insets bottom="15.0" left="10.0" right="10.0" top="5.0" />
 			</VBox.margin>
 		</Button>
-      
+
 		<CheckBox fx:id="modeEdition" mnemonicParsing="false" onAction="#onToggleModeEdition" text="Mode Édition">
 			<VBox.margin>
-				<Insets bottom="10.0" left="15.0" right="10.0" top="20.0" />
+				<Insets bottom="10.0" left="15.0" top="10.0" />
 			</VBox.margin>
 		</CheckBox>
-      <HBox id="choixEdition" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-         <children>
-            <RadioButton mnemonicParsing="false" text="Anneau">
-               <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </padding>
-               <HBox.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </HBox.margin>
-               <toggleGroup>
-                  <ToggleGroup fx:id="Token" />
-               </toggleGroup>
-            </RadioButton>
-            <RadioButton mnemonicParsing="false" text="Pion" toggleGroup="$Token">
-               <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </padding>
-               <HBox.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </HBox.margin>
-            </RadioButton>
-            <RadioButton mnemonicParsing="false" text="Noir">
-               <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </padding>
-               <HBox.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </HBox.margin>
-               <toggleGroup>
-                  <ToggleGroup fx:id="Team" />
-               </toggleGroup>
-            </RadioButton>
-            <RadioButton mnemonicParsing="false" text="Blanc" toggleGroup="$Team">
-               <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </padding>
-               <HBox.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </HBox.margin>
-            </RadioButton>
-         </children>
-      </HBox>
+
+		<HBox id="choixEdition" alignment="CENTER" spacing="10.0">
+			<children>
+				<RadioButton mnemonicParsing="false" text="Anneau">
+					<toggleGroup>
+						<ToggleGroup fx:id="Token" />
+					</toggleGroup>
+				</RadioButton>
+				<RadioButton mnemonicParsing="false" text="Pion" toggleGroup="$Token" />
+				<RadioButton mnemonicParsing="false" text="Noir">
+					<toggleGroup>
+						<ToggleGroup fx:id="Team" />
+					</toggleGroup>
+				</RadioButton>
+				<RadioButton mnemonicParsing="false" text="Blanc" toggleGroup="$Team" />
+			</children>
+			<VBox.margin>
+				<Insets bottom="15.0" top="5.0" />
+			</VBox.margin>
+		</HBox>
+
+		<TilePane alignment="CENTER" hgap="20.0" vgap="10.0">
+			<children>
+				<VBox alignment="CENTER" spacing="5.0">
+					<ColorPicker fx:id="pickerCouleur1" onAction="#onActionCouleur1" prefWidth="90.0" />
+					<Label text="Couleur 1" />
+				</VBox>
+				<VBox alignment="CENTER" spacing="5.0">
+					<ColorPicker fx:id="pickerCouleur2" onAction="#onActionCouleur2" prefWidth="90.0" />
+					<Label text="Couleur 2" />
+				</VBox>
+				<VBox alignment="CENTER" spacing="5.0">
+					<ColorPicker fx:id="pickerCouleur3" onAction="#onActionCouleur3" prefWidth="90.0" />
+					<Label text="Couleur 3" />
+				</VBox>
+			</children>
+			<VBox.margin>
+				<Insets top="15.0" />
+			</VBox.margin>
+		</TilePane>
 	</children>
 </VBox>

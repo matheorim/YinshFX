@@ -5,6 +5,11 @@ import but.info.sae2_12.model.factory.IFactory;
 import but.info.sae2_12.model.state.IState;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 public class GameController {
 
@@ -14,6 +19,9 @@ public class GameController {
 	@FXML private Button ligneNoire;
 	@FXML private CheckBox modeEdition;
 	@FXML private HBox choixEdition;
+	@FXML private ColorPicker pickerCouleur1;
+	@FXML private ColorPicker pickerCouleur2; 
+	@FXML private ColorPicker pickerCouleur3; 
 	
 	private IFactory factory = new FactoryDoubled();		
 
@@ -51,4 +59,21 @@ public class GameController {
 	    // TODO: mainController.getModel().isEditModeProperty().set(modeEdition.isSelected());
 	}
 	
+	@FXML
+	private void onActionCouleur1() {
+	    Color nouvelleCouleur = pickerCouleur1.getValue();
+	    // TODO: mainController.getModel().setCouleur1(nouvelleCouleur);
+	}
+
+	@FXML
+	private void onActionCouleur2() {
+	    Color nouvelleCouleur = pickerCouleur2.getValue();
+	    // TODO: mainController.getModel().setCouleur2(nouvelleCouleur);
+	}
+
+	@FXML
+	private void onActionCouleur3() {
+	    Color nouvelleCouleur = pickerCouleur3.getValue();
+	    // TODO: mainController.getModel().setCouleur3(nouvelleCouleur);
+	}
 }
