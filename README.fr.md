@@ -1,5 +1,7 @@
 # YinshFX
 
+🇬🇧 [English version](README.md)
+
 Jeu de plateau à deux équipes en **JavaFX**, joué sur une grille **hexagonale**, avec des **anneaux** et des **pions**, et la suppression de lignes alignées. Le jeu propose une interface graphique, un mode édition et une **intelligence artificielle** basée sur l'algorithme **Minimax**.
 
 Projet réalisé à l'IUT dans le cadre de la SAE 2.12.
