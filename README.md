@@ -4,7 +4,7 @@
 
 A two-team board game built with **JavaFX**, played on a **hexagonal** grid with **rings** and **pawns**, where players remove aligned lines. The game provides a graphical interface, an edit mode and an **artificial intelligence** based on the **Minimax** algorithm.
 
-Team project completed at the IUT as part of SAE 2.12.
+Team project completed at the IUT as part of SAE 2.12 in a group of 4.
 
 ## Features
 
@@ -106,7 +106,3 @@ The project follows the **MVC** pattern (Model - View - Controller).
 - **Controllers** (`controllers`): they connect the interface to the model. The interaction modes (`GameMode`, `EditMode`) change how the board reacts to clicks.
 - **AI** (`AI`): the **Minimax** algorithm explores the possible moves to choose the best one.
 - **Coordinates** (`hexagonalCoordinate`): an independent library reused by the application.
-
-## Team
-
-Group 1: LK, MA, FE, RM, QN (replace with first and last names).
