@@ -4,7 +4,7 @@
 
 Jeu de plateau à deux équipes en **JavaFX**, joué sur une grille **hexagonale**, avec des **anneaux** et des **pions**, et la suppression de lignes alignées. Le jeu propose une interface graphique, un mode édition et une **intelligence artificielle** basée sur l'algorithme **Minimax**.
 
-Projet réalisé à l'IUT dans le cadre de la SAE 2.12.
+Projet réalisé à l'IUT dans le cadre de la SAE 2.12. Par groupe de 4 personnes.
 
 ## Fonctionnalités
 
@@ -107,6 +107,3 @@ Le projet suit le patron **MVC** (Modèle - Vue - Contrôleur).
 - **IA** (`AI`) : l'algorithme **Minimax** explore les coups possibles pour choisir le meilleur.
 - **Coordonnées** (`hexagonalCoordinate`) : bibliothèque indépendante, réutilisée par l'application.
 
-## Équipe
-
-Groupe 1 : LK, MA, FE, RM, QN (à remplacer par les prénoms et noms).
